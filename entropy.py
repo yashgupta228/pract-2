@@ -14,7 +14,7 @@ def info_gain(df, attr, target):
          (len(df[df[attr] == v]) / len(df)) * entropy(df[df[attr] == v][target])
           for v in vals
 )
- return total_entropy - weighted_entropy
+ return total_entropy -weighted_entropy
 
 def id3(df,  target,attrs):
     if len(df[target].unique()) ==1:
