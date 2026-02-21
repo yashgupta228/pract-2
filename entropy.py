@@ -31,11 +31,11 @@ def id3(df,  target,attrs):
 def predict(tree , input_data):
     if not isinstance(tree,dict):
         return tree
-     root = next(iter(tree))
-     val = input_data.get(root)
-     if val in tree[root]:
+    root = next(iter(tree))
+    val = input_data.get(root)
+    if val in tree[root]:
         return predict(tree[root][val], input_data)
-     return "Unknown"
+    return "Unknown"
 
 st.title("ID3 Decision Tree Classifier")
 fig, ax = plt.subplots()
