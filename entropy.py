@@ -72,7 +72,7 @@ colors = {"yes": "green", "no": "red"}
 
 for outcome in df[target_col].unique():
     subset= df[df[target_col] == outcome]
-       (
+      ax . scatter (
          subset[features[0]], subset[features[1]],
          color=colors[outcome], label=outcome,
          s=100, edgecolor="k"
