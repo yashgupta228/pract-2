@@ -68,22 +68,3 @@ if 'tree' in st.session_state:
     if st.button("Predict"):
        st.write(f"Result: {predict(st.session_state['tree'], inputs)}")
 
-fig, ax = plt.subplots()
-colors = {"yes": "green", "no": "red"}
-
-for outcome in df[target_col].unique():
-    subset= df[df[target_col] == outcome]
-    ax.scatter(
-         subset[features[0]], subset[features[1]],
-         color=colors[outcome], label=outcome,
-         s=100, edgecolor="k"
-)
-
-ax.set_xlabel(features[0])
-ax.set_ylabel(features[1])
-ax.set_title("Dataset Distribution")
-ax.legend()
-ax.grid(True)
-
-st.pyplot(fig)
-
