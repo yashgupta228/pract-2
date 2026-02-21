@@ -67,6 +67,7 @@ if 'tree' in st.session_state:
     inputs = {col: st.selectbox(col, df[col].unique()) for col in features}
     if st.button("Predict"):
        st.write(f"Result: {predict(st.session_state['tree'], inputs)}")
+   if uploaded_file is not None:
     fig, ax = plt.subplots()
 colors = {"yes": "green", "no": "red"}
 
