@@ -38,24 +38,6 @@ def predict(tree , input_data):
     return "Unknown"
 
 st.title("ID3 Decision Tree Classifier")
-fig, ax = plt.subplots()
-colors = {"yes": "green", "no": "red"}
-
-for outcome in df[target_col].unique():
-    subset= df[df[target_col] == outcome]
-    ax.scatter(
-         subset[features[0]], subset[features[1]],
-         color=colors[outcome], label=outcome,
-         s=100, edgecolor="k"
-)
-
-ax.set_xlabel(features[0])
-ax.set_ylabel(features[1])
-ax.set_title("Dataset Distribution")
-ax.legend()
-ax.grid(True)
-
-st.pyplot(fig)
 
 data_dict = {
     " outlook": ["sunny", "sunny", "overcast", "rain", "rain", "overcast", "sunny",
