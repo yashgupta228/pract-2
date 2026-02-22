@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 import math
 
+st.set_page_config(page_title="ID3 Decision Tree Classifier", layout="centered")
+st.title("ID3 Decision Tree Classifier")
+st.write("Train and test a simple **ID3 Decision Tree** using categorical data.")
+
 def entropy(col):
     values, counts = np.unoique(col, return_counts=True)
     return -sum((c / len(col)) *math.log2(c/ len(col)) for c in counts)
@@ -37,53 +41,7 @@ def predict(tree , input_data):
         return predict(tree[root][val], input_data)
     return "Unknown"
 
-st.title("ID3 Decision Tree Classifier")
 
 
-data_dict = {
-    " outlook": ["sunny", "sunny", "overcast", "rain", "rain", "overcast", "sunny",
-                "sunny", "overcast", "rain", "overcast", "overcast", "rain", "sunny"], 
-     "humidity": ["high", "normal", "high", "normal", "high", "high", "normal",
-               "normal", "normal", "normal", "normal", "high", "high", "normal"],
-     "playtennis": ["no", "yes", "yes", "yes", "no", "yes", "yes", "yes", "no",
-                  "yes", "no", "yes", "yes", "yes"]
-}
 
-df = pd.DataFrame(data_dict)
-
-uploaded_file = st.file_uploader("Upload CSV", type="csv")
-if uploaded_file:
-     df = pd.read_csv(uploaded_file)
-
-target_col = st.selectbox("Target Column", df.columns, index=len(df.columns) - 1)
-features = [c for c in df.columns if c != target_col]
-
-if st.button("Train"):
-     tree = id3(df, target_col, features)
-     st.session_state['tree'] = tree
-     st.json(tree)
-
-if 'tree' in st.session_state:
-    inputs = {col: st.selectbox(col, df[col].unique()) for col in features}
-    if st.button("Predict"):
-       st.write(f"Result: {predict(st.session_state['tree'], inputs)}")
-    ax = plt.subplots()
-colors = {"yes": "green", "no": "red"}
-
-for outcome in df[target_col].unique():
-    subset= df[df[target_col] == outcome]
-     ax.scatter(    
-         subset[features[0]], subset[features[1]],
-         color=colors[outcome], label=outcome,
-         s=100, edgecolor="k"
-     )
-
-ax.set_xlabel(features[0])
-ax.set_ylabel(features[1])
-ax.set_title("Dataset Distribution")
-ax.legend()
-ax.grid(True)
-
-st.pyplot(fig)
-
-
+     
